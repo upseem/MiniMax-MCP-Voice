@@ -1,7 +1,6 @@
 # speech model default values
 DEFAULT_VOICE_ID = "female-shaonv"
 DEFAULT_SPEECH_MODEL = "speech-2.6-hd"
-DEFAULT_MUSIC_MODEL = "music-2.0"
 DEFAULT_SPEED = 1.0
 DEFAULT_VOLUME = 1.0
 DEFAULT_PITCH = 0
@@ -12,19 +11,13 @@ DEFAULT_CHANNEL = 1
 DEFAULT_FORMAT = "mp3"
 DEFAULT_LANGUAGE_BOOST = "auto"
 
-# video model default values
-DEFAULT_T2V_MODEL = "MiniMax-Hailuo-2.3"
-
-# image model default values
-DEFAULT_T2I_MODEL = "image-01"
-
 # ENV variables
 ENV_MINIMAX_API_KEY = "MINIMAX_API_KEY"
 ENV_MINIMAX_API_HOST = "MINIMAX_API_HOST"
 ENV_MINIMAX_MCP_BASE_PATH = "MINIMAX_MCP_BASE_PATH"
 ENV_RESOURCE_MODE = "MINIMAX_API_RESOURCE_MODE"
 
-RESOURCE_MODE_LOCAL = "local" # save resource to local file system
-RESOURCE_MODE_URL = "url" # provide resource url
+RESOURCE_MODE_LOCAL = "local"  # save resource to local file system
+RESOURCE_MODE_URL = "url"  # provide resource url
 
 ENV_FASTMCP_LOG_LEVEL = "FASTMCP_LOG_LEVEL"

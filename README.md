@@ -1,160 +1,307 @@
-![export](https://github.com/MiniMax-AI/MiniMax-01/raw/main/figures/MiniMaxLogo-Light.png)
+# MiniMax MCP Voice
 
-<div align="center" style="line-height: 1;">
-  <a href="https://www.minimax.io" target="_blank" style="margin: 2px; color: var(--fgColor-default);">
-    <img alt="Homepage" src="https://img.shields.io/badge/_Homepage-MiniMax-FF4040?style=flat-square&labelColor=2C3E50&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNDkwLjE2IDQxMS43Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjMzLjQ1LDQwLjgxYTE3LjU1LDE3LjU1LDAsMSwwLTM1LjEsMFYzMzEuNTZhNDAuODIsNDAuODIsMCwwLDEtODEuNjMsMFYxNDVhMTcuNTUsMTcuNTUsMCwxLDAtMzUuMDksMHY3OS4wNmE0MC44Miw0MC44MiwwLDAsMS04MS42MywwVjE5NS40MmExMS42MywxMS42MywwLDAsMSwyMy4yNiwwdjI4LjY2YTE3LjU1LDE3LjU1LDAsMCwwLDM1LjEsMFYxNDVBNDAuODIsNDAuODIsMCwwLDEsMTQwLDE0NVYzMzEuNTZhMTcuNTUsMTcuNTUsMCwwLDAsMzUuMSwwVjIxNy41aDBWNDAuODFhNDAuODEsNDAuODEsMCwxLDEsODEuNjIsMFYyODEuNTZhMTEuNjMsMTEuNjMsMCwxLDEtMjMuMjYsMFptMjE1LjksNjMuNEE0MC44Niw0MC44NiwwLDAsMCw0MDguNTMsMTQ1VjMwMC44NWExNy41NSwxNy41NSwwLDAsMS0zNS4wOSwwdi0yNjBhNDAuODIsNDAuODIsMCwwLDAtODEuNjMsMFYzNzAuODlhMTcuNTUsMTcuNTUsMCwwLDEtMzUuMSwwVjMzMGExMS42MywxMS42MywwLDEsMC0yMy4yNiwwdjQwLjg2YTQwLjgxLDQwLjgxLDAsMCwwLDgxLjYyLDBWNDAuODFhMTcuNTUsMTcuNTUsMCwwLDEsMzUuMSwwdjI2MGE0MC44Miw0MC44MiwwLDAsMCw4MS42MywwVjE0NWExNy41NSwxNy41NSwwLDEsMSwzNS4xLDBWMjgxLjU2YTExLjYzLDExLjYzLDAsMCwwLDIzLjI2LDBWMTQ1QTQwLjg1LDQwLjg1LDAsMCwwLDQ0OS4zNSwxMDQuMjFaIi8+PC9zdmc+&logoWidth=20" style="display: inline-block; vertical-align: middle;"/>
-  </a>
-  <a href="https://arxiv.org/abs/2501.08313" target="_blank" style="margin: 2px;">
-    <img alt="Paper" src="https://img.shields.io/badge/📖_Paper-MiniMax--01-FF4040?style=flat-square&labelColor=2C3E50" style="display: inline-block; vertical-align: middle;"/>
-  </a>
-   <a href="https://chat.minimax.io/" target="_blank" style="margin: 2px;">
-    <img alt="Chat" src="https://img.shields.io/badge/_MiniMax_Chat-FF4040?style=flat-square&labelColor=2C3E50&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNDkwLjE2IDQxMS43Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9PC9zdHlsZT48L2RlZnM+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjMzLjQ1LDQwLjgxYTE3LjU1LDE3LjU1LDAsMSwwLTM1LjEsMFYzMzEuNTZhNDAuODIsNDAuODIsMCwwLDEtODEuNjMsMFYxNDVhMTcuNTUsMTcuNTUsMCwxLDAtMzUuMDksMHY3OS4wNmE0MC44Miw0MC44MiwwLDAsMS04MS42MywwVjE5NS40MmExMS42MywxMS42MywwLDAsMSwyMy4yNiwwdjI4LjY2YTE3LjU1LDE3LjU1LDAsMCwwLDM1LjEsMFYxNDVBNDAuODIsNDAuODIsMCwwLDEsMTQwLDE0NVYzMzEuNTZhMTcuNTUsMTcuNTUsMCwwLDAsMzUuMSwwVjIxNy41aDBWNDAuODFhNDAuODEsNDAuODEsMCwxLDEsODEuNjIsMFYyODEuNTZhMTEuNjMsMTEuNjMsMCwxLDEtMjMuMjYsMFptMjE1LjksNjMuNEE0MC44Niw0MC44NiwwLDAsMCw0MDguNTMsMTQ1VjMwMC44NWExNy41NSwxNy41NSwwLDAsMS0zNS4wOSwwdi0yNjBhNDAuODIsNDAuODIsMCwwLDAtODEuNjMsMFYzNzAuODlhMTcuNTUsMTcuNTUsMCwwLDEtMzUuMSwwVjMzMGExMS42MywxMS42MywwLDEsMC0yMy4yNiwwdjQwLjg2YTQwLjgxLDQwLjgxLDAsMCwwLDgxLjYyLDBWNDAuODFhMTcuNTUsMTcuNTUsMCwwLDEsMzUuMSwwdjI2MGE0MC44Miw0MC44MiwwLDAsMCw4MS42MywwVjE0NWExNy41NSwxNy41NSwwLDEsMSwzNS4xLDBWMjgxLjU2YTExLjYzLDExLjYzLDAsMCwwLDIzLjI2LDBWMTQ1QTQwLjg1LDQwLjg1LDAsMCwwLDQ0OS4zNSwxMDQuMjFaIi8+PC9zdmc+&logoWidth=20" style="display: inline-block; vertical-align: middle;"/>
-  </a>
-  <a href="https://www.minimax.io/platform" style="margin: 2px;">
-    <img alt="API" src="https://img.shields.io/badge/⚡_API-Platform-FF4040?style=flat-square&labelColor=2C3E50" style="display: inline-block; vertical-align: middle;"/>
-  </a>  
-</div>
-<div align="center" style="line-height: 1;">
-  <a href="https://huggingface.co/MiniMaxAI" target="_blank" style="margin: 2px;">
-    <img alt="Hugging Face" src="https://img.shields.io/badge/🤗_Hugging_Face-MiniMax-FF4040?style=flat-square&labelColor=2C3E50" style="display: inline-block; vertical-align: middle;"/>
-  </a>
-  <a href="https://github.com/MiniMax-AI/MiniMax-AI.github.io/blob/main/images/wechat-qrcode.jpeg" target="_blank" style="margin: 2px;">
-    <img alt="WeChat" src="https://img.shields.io/badge/_WeChat-MiniMax-FF4040?style=flat-square&labelColor=2C3E50" style="display: inline-block; vertical-align: middle;"/>
-  </a>
-  <a href="https://www.modelscope.cn/organization/MiniMax" target="_blank" style="margin: 2px;">
-    <img alt="ModelScope" src="https://img.shields.io/badge/_ModelScope-MiniMax-FF4040?style=flat-square&labelColor=2C3E50" style="display: inline-block; vertical-align: middle;"/>
-  </a>
-</div>
-<div align="center" style="line-height: 1;">
-   <a href="https://github.com/MiniMax-AI/MiniMax-MCP/blob/main/LICENSE" style="margin: 2px;">
-    <img alt="Code License" src="https://img.shields.io/badge/_Code_License-MIT-FF4040?style=flat-square&labelColor=2C3E50" style="display: inline-block; vertical-align: middle;"/>
-  </a>
-</div>
+基于 [MiniMax 官方 MCP](https://github.com/MiniMax-AI/MiniMax-MCP) 修改，仅保留**语音/音频**相关功能。
 
-<p align="center">
-  Official MiniMax Model Context Protocol (MCP) server that enables interaction with powerful Text to Speech and video/image generation APIs. This server allows MCP clients like <a href="https://www.anthropic.com/claude">Claude Desktop</a>, <a href="https://www.cursor.so">Cursor</a>, <a href="https://codeium.com/windsurf">Windsurf</a>, <a href="https://github.com/openai/openai-agents-python">OpenAI Agents</a> and others to generate speech, clone voices, generate video, generate image and more.
-</p>
+支持 MCP 客户端（如 [Claude Desktop](https://www.anthropic.com/claude)、[Cursor](https://www.cursor.so)、[Windsurf](https://codeium.com/windsurf)、[OpenAI Agents](https://github.com/openai/openai-agents-python) 等）进行文本转语音、声音克隆、声音设计、音频播放等操作。
 
-## Documentation
-- [中文文档](README-CN.md)
-- [MiniMax-MCP-JS](https://github.com/MiniMax-AI/MiniMax-MCP-JS) - Official JavaScript implementation of MiniMax MCP
+---
 
-## Quickstart with MCP Client
-1. Get your API key from [MiniMax](https://www.minimax.io/platform/user-center/basic-information/interface-key). 
-2. Install `uv` (Python package manager), install with `curl -LsSf https://astral.sh/uv/install.sh | sh` or see the `uv` [repo](https://github.com/astral-sh/uv) for additional install methods.
-3. **Important**: The API host and key vary by region and must match; otherwise, you'll encounter an `Invalid API key` error.
+## 可用工具
 
-|Region| Global  | Mainland  |
-|:--|:-----|:-----|
-|MINIMAX_API_KEY| go get from [MiniMax Global](https://www.minimax.io/platform/user-center/basic-information/interface-key) | go get from [MiniMax](https://platform.minimaxi.com/user-center/basic-information/interface-key) |
-|MINIMAX_API_HOST| https://api.minimax.io | https://api.minimaxi.com |
+| 工具 | 描述 | 收费 |
+|---|---|---|
+| `text_to_audio` | 文本转语音 — 支持多种声音、语速/音量/音调/情感调节、24种语言 | 是 |
+| `list_voices` | 列出所有可用声音（系统声音 + 克隆声音） | 否 |
+| `voice_clone` | 声音克隆 — 上传音频文件克隆新声音 | 是 |
+| `play_audio` | 本地播放音频文件（WAV/MP3），依赖 ffplay | 否 |
+| `voice_design` | 声音设计 — 用自然语言描述生成自定义声音并预览 | 是 |
 
+---
 
-### Claude Desktop
-Go to `Claude > Settings > Developer > Edit Config > claude_desktop_config.json` to include the following:
+## 环境变量
 
+| 变量名 | 说明 | 必填 | 默认值 |
+|---|---|---|---|
+| `MINIMAX_API_KEY` | MiniMax API 密钥 | 是 | - |
+| `MINIMAX_API_HOST` | API 地址 | 是 | - |
+| `MINIMAX_MCP_BASE_PATH` | 输出文件保存路径 | 否 | `~/Desktop` |
+| `MINIMAX_API_RESOURCE_MODE` | 资源模式：`url` 返回链接，`local` 下载到本地 | 否 | `url` |
+
+**API 地区对照**（Key 和 Host 必须匹配同一地区，否则会报 `invalid api key`）：
+
+| 地区 | MINIMAX_API_KEY | MINIMAX_API_HOST |
+|---|---|---|
+| 国际版 | [MiniMax 国际版获取](https://www.minimax.io/platform/user-center/basic-information/interface-key) | `https://api.minimax.io` |
+| 国内版 | [MiniMax 国内版获取](https://platform.minimaxi.com/user-center/basic-information/interface-key) | `https://api.minimaxi.com` |
+
+---
+
+## 传输方式
+
+支持 `stdio` 和 `SSE` 两种传输模式：
+
+| stdio | SSE |
+|---|---|
+| 本地运行 | 可本地或云端部署 |
+| 通过 stdout 通信 | 通过网络通信 |
+| 输入：支持本地文件或 URL | 输入：云端部署建议使用 URL |
+
+---
+
+## 使用方式
+
+### 方式一：本地使用（从源码运行）
+
+适合你修改了代码、想直接用本地版本的场景。
+
+#### 1. 克隆项目并安装依赖
+
+```bash
+git clone https://github.com/upseem/MiniMax-MCP-Voice.git
+cd MiniMax-MCP-Voice
+uv venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+uv pip install -e .
 ```
+
+#### 2. 配置环境变量
+
+在项目根目录创建 `.env` 文件：
+
+```env
+MINIMAX_API_KEY=你的API密钥
+MINIMAX_API_HOST=https://api.minimaxi.com
+MINIMAX_MCP_BASE_PATH=~/Desktop
+MINIMAX_API_RESOURCE_MODE=url
+```
+
+#### 3. 在 MCP 客户端中配置
+
+**Claude Desktop**
+
+前往 `Claude > Settings > Developer > Edit Config > claude_desktop_config.json`：
+
+```json
+{
+  "mcpServers": {
+    "MiniMax-Voice": {
+      "command": "/你的项目路径/MiniMax-MCP-Voice/.venv/bin/python",
+      "args": [
+        "-m", "minimax_mcp.server"
+      ],
+      "env": {
+        "MINIMAX_API_KEY": "你的API密钥",
+        "MINIMAX_API_HOST": "https://api.minimaxi.com",
+        "MINIMAX_MCP_BASE_PATH": "~/Desktop",
+        "MINIMAX_API_RESOURCE_MODE": "url"
+      }
+    }
+  }
+}
+```
+
+> 将 `/你的项目路径/` 替换为你实际的项目路径。可通过 `which python`（在虚拟环境中）获取完整路径。
+
+**Cursor**
+
+前往 `Cursor -> Preferences -> Cursor Settings -> MCP -> Add new global MCP Server`，添加同样的配置。
+
+#### 4. 直接运行 stdio 模式（调试用）
+
+```bash
+source .venv/bin/activate
+python -m minimax_mcp.server
+```
+
+#### 5. 以 SSE 模式运行（本地网络服务）
+
+```bash
+source .venv/bin/activate
+python -m minimax_mcp.server --transport sse --port 8000
+```
+
+然后在 MCP 客户端中配置 SSE 地址：
+
+```json
+{
+  "mcpServers": {
+    "MiniMax-Voice": {
+      "url": "http://localhost:8000/sse"
+    }
+  }
+}
+```
+
+---
+
+### 方式二：线上使用（通过 uvx 直接安装原版）
+
+如果你不需要修改代码，可以直接使用 PyPI 上的原版包（注意：原版包含视频/图片/音乐等全部功能）。
+
+#### 1. 安装 uv
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+#### 2. 在 MCP 客户端中配置
+
+**Claude Desktop**
+
+```json
 {
   "mcpServers": {
     "MiniMax": {
       "command": "uvx",
       "args": [
-        "minimax-mcp",
-        "-y"
+        "minimax-mcp"
       ],
       "env": {
-        "MINIMAX_API_KEY": "insert-your-api-key-here",
-        "MINIMAX_MCP_BASE_PATH": "local-output-dir-path, such as /User/xxx/Desktop",
-        "MINIMAX_API_HOST": "api host, https://api.minimax.io | https://api.minimaxi.com",
-        "MINIMAX_API_RESOURCE_MODE": "optional, [url|local], url is default, audio/image/video are downloaded locally or provided in URL format"
+        "MINIMAX_API_KEY": "你的API密钥",
+        "MINIMAX_API_HOST": "https://api.minimaxi.com",
+        "MINIMAX_MCP_BASE_PATH": "~/Desktop",
+        "MINIMAX_API_RESOURCE_MODE": "url"
       }
     }
   }
 }
-
 ```
-⚠️ Warning: The API key needs to match the host. If an error "API Error: invalid api key" occurs, please check your api host:
-- Global Host：`https://api.minimax.io`
-- Mainland Host：`https://api.minimaxi.com`
 
-If you're using Windows, you will have to enable "Developer Mode" in Claude Desktop to use the MCP server. Click "Help" in the hamburger menu in the top left and select "Enable Developer Mode".
+> 如果 `uvx` 命令找不到，请运行 `which uvx` 获取绝对路径，然后将 `"command": "uvx"` 替换为 `"command": "/绝对路径/uvx"`。
 
+---
 
-### Cursor
-Go to `Cursor -> Preferences -> Cursor Settings -> MCP -> Add new global MCP Server` to add above config.
+### 方式三：云端部署（SSE 模式）
 
-That's it. Your MCP client can now interact with MiniMax through these tools:
+适合团队共享或部署到服务器的场景。
 
-## Transport
-We support two transport types: stdio and sse.
-| stdio  | SSE  |
-|:-----|:-----|
-| Run locally | Can be deployed locally or in the cloud |
-| Communication through `stdout` | Communication through `network` |
-| Input: Supports processing `local files` or valid `URL` resources | Input: When deployed in the cloud, it is recommended to use `URL` for input |
+#### 1. 在服务器上安装并运行
 
-## Available Tools
-| tool  | description  |
-|-|-|
-|`text_to_audio`|Convert text to audio with a given voice|
-|`list_voices`|List all voices available|
-|`voice_clone`|Clone a voice using provided audio files|
-|`generate_video`|Generate a video from a prompt|
-|`text_to_image`|Generate a image from a prompt|
-|`query_video_generation`|Query the result of video generation task|
-|`music_generation`|Generate a music track from a prompt and lyrics|
-|`voice_design`|Generate a voice from a prompt using preview text|
+```bash
+git clone https://github.com/upseem/MiniMax-MCP-Voice.git
+cd MiniMax-MCP-Voice
+uv venv && source .venv/bin/activate
+uv pip install -e .
 
-## Release Notes
+# 设置环境变量
+export MINIMAX_API_KEY="你的API密钥"
+export MINIMAX_API_HOST="https://api.minimaxi.com"
+export MINIMAX_MCP_BASE_PATH="/data/output"
+export MINIMAX_API_RESOURCE_MODE="url"
 
-### July 2, 2025
+# 启动 SSE 服务
+python -m minimax_mcp.server --transport sse --host 0.0.0.0 --port 8000
+```
 
-#### 🆕 What's New
-- **Voice Design**: New `voice_design` tool - create custom voices from descriptive prompts with preview audio
-- **Video Enhancement**: Added `MiniMax-Hailuo-02` model with ultra-clear quality and duration/resolution controls  
-- **Music Generation**: Enhanced `music_generation` tool powered by `music-1.5` model
+#### 2. 客户端连接
 
-#### 📈 Enhanced Tools
-- `voice_design` - Generate personalized voices from text descriptions
-- `generate_video` - Now supports MiniMax-Hailuo-02 with 6s/10s duration and 768P/1080P resolution options
-- `music_generation` - High-quality music creation with music-1.5 model
+在 MCP 客户端中配置远程 SSE 地址：
+
+```json
+{
+  "mcpServers": {
+    "MiniMax-Voice": {
+      "url": "https://你的服务器地址:8000/sse"
+    }
+  }
+}
+```
+
+> 建议在云端部署时将 `MINIMAX_API_RESOURCE_MODE` 设为 `url`，这样生成的音频以 URL 形式返回，无需下载到服务器本地。
+
+---
+
+## 工具详细说明
+
+### text_to_audio — 文本转语音
+
+将文本转换为音频文件，支持丰富的参数控制。
+
+| 参数 | 类型 | 必填 | 默认值 | 说明 |
+|---|---|---|---|---|
+| `text` | str | 是 | - | 要转换的文本 |
+| `voice_id` | str | 否 | `female-shaonv` | 语音 ID |
+| `model` | str | 否 | `speech-2.6-hd` | 语音模型 |
+| `speed` | float | 否 | `1.0` | 语速 (0.5~2.0) |
+| `vol` | float | 否 | `1.0` | 音量 (0~10) |
+| `pitch` | int | 否 | `0` | 音调 (-12~12) |
+| `emotion` | str | 否 | `happy` | 情感：happy/sad/angry/fearful/disgusted/surprised/neutral |
+| `sample_rate` | int | 否 | `32000` | 采样率：8000/16000/22050/24000/32000/44100 |
+| `bitrate` | int | 否 | `128000` | 比特率：32000/64000/128000/256000 |
+| `channel` | int | 否 | `1` | 声道数：1/2 |
+| `format` | str | 否 | `mp3` | 格式：pcm/mp3/flac |
+| `language_boost` | str | 否 | `auto` | 语言增强（支持24种语言） |
+| `output_directory` | str | 否 | 基础路径 | 输出目录 |
+
+### list_voices — 列出可用声音
+
+| 参数 | 类型 | 必填 | 默认值 | 说明 |
+|---|---|---|---|---|
+| `voice_type` | str | 否 | `all` | 筛选类型：all/system/voice_cloning |
+
+### voice_clone — 声音克隆
+
+使用提供的音频文件克隆新声音，分三步：上传文件 -> 克隆声音 -> 生成演示音频。
+
+| 参数 | 类型 | 必填 | 默认值 | 说明 |
+|---|---|---|---|---|
+| `voice_id` | str | 是 | - | 新克隆声音的 ID |
+| `file` | str | 是 | - | 音频文件路径或 URL |
+| `text` | str | 是 | - | 演示音频文本 |
+| `is_url` | bool | 否 | `false` | 文件是否为 URL |
+| `output_directory` | str | 否 | 基础路径 | 输出目录 |
+
+### play_audio — 播放音频
+
+本地播放音频文件，依赖 `ffplay`（需安装 [ffmpeg](https://ffmpeg.org/)）。
+
+| 参数 | 类型 | 必填 | 默认值 | 说明 |
+|---|---|---|---|---|
+| `input_file_path` | str | 是 | - | 音频文件路径 |
+| `is_url` | bool | 否 | `false` | 是否为 URL |
+
+### voice_design — 声音设计
+
+用自然语言描述想要的声音特征，自动生成对应声音并预览。
+
+| 参数 | 类型 | 必填 | 默认值 | 说明 |
+|---|---|---|---|---|
+| `prompt` | str | 是 | - | 声音描述提示词 |
+| `preview_text` | str | 是 | - | 预览文本 |
+| `voice_id` | str | 否 | - | 基础声音 ID（可选） |
+| `output_directory` | str | 否 | 基础路径 | 输出目录 |
+
+---
 
 ## FAQ
+
 ### 1. invalid api key
-Please ensure your API key and API host are regionally aligned
-|Region| Global  | Mainland  |
-|:--|:-----|:-----|
-|MINIMAX_API_KEY| go get from [MiniMax Global](https://www.minimax.io/platform/user-center/basic-information/interface-key) | go get from [MiniMax](https://platform.minimaxi.com/user-center/basic-information/interface-key) |
-|MINIMAX_API_HOST| https://api.minimax.io | https://api.minimaxi.com |
+请确保 API Key 和 API Host 来自同一地区：
+- 国际版：Key 从 [MiniMax 国际版](https://www.minimax.io/platform/user-center/basic-information/interface-key) 获取，Host 为 `https://api.minimax.io`
+- 国内版：Key 从 [MiniMax 国内版](https://platform.minimaxi.com/user-center/basic-information/interface-key) 获取，Host 为 `https://api.minimaxi.com`
 
 ### 2. spawn uvx ENOENT
-Please confirm its absolute path by running this command in your terminal:
-```sh
+在终端运行以下命令获取 uvx 的绝对路径：
+```bash
 which uvx
 ```
-Once you obtain the absolute path (e.g., /usr/local/bin/uvx), update your configuration to use that path (e.g., "command": "/usr/local/bin/uvx"). 
+然后将配置中的 `"command": "uvx"` 替换为完整路径，如 `"command": "/usr/local/bin/uvx"`。
 
-### 3. How to use `generate_video` in async-mode
-Define completion rules before starting:
-<img src="https://public-cdn-video-data-algeng.oss-cn-wulanchabu.aliyuncs.com/cursor_rule2.png?x-oss-process=image/resize,p_50/format,webp" style="display: inline-block; vertical-align: middle;"/>
-Alternatively, these rules can be configured in your IDE settings (e.g., Cursor):
-<img src="https://public-cdn-video-data-algeng.oss-cn-wulanchabu.aliyuncs.com/cursor_video_rule.png?x-oss-process=image/resize,p_50/format,webp" style="display: inline-block; vertical-align: middle;"/>
+### 3. play_audio 无法播放
+请确保已安装 ffmpeg：
+```bash
+# macOS
+brew install ffmpeg
 
+# Ubuntu/Debian
+sudo apt install ffmpeg
 
-## Example usage
+# Windows
+# 从 https://ffmpeg.org/download.html 下载并添加到 PATH
+```
 
-⚠️ Warning: Using these tools may incur costs.
+---
 
-### 1. broadcast a segment of the evening news
-<img src="https://public-cdn-video-data-algeng.oss-cn-wulanchabu.aliyuncs.com/Snipaste_2025-04-09_20-07-53.png?x-oss-process=image/resize,p_50/format,webp" style="display: inline-block; vertical-align: middle;"/>
+## 许可证
 
-### 2. clone a voice
-<img src="https://public-cdn-video-data-algeng.oss-cn-wulanchabu.aliyuncs.com/Snipaste_2025-04-09_19-45-13.png?x-oss-process=image/resize,p_50/format,webp" style="display: inline-block; vertical-align: middle;"/>
-
-### 3. generate a video
-<img src="https://public-cdn-video-data-algeng.oss-cn-wulanchabu.aliyuncs.com/Snipaste_2025-04-09_19-58-52.png?x-oss-process=image/resize,p_50/format,webp" style="display: inline-block; vertical-align: middle;"/>
-<img src="https://public-cdn-video-data-algeng.oss-cn-wulanchabu.aliyuncs.com/Snipaste_2025-04-09_19-59-43.png?x-oss-process=image/resize,p_50/format,webp" style="display: inline-block; vertical-align: middle; "/>
-
-### 4. generate images
-<img src="https://public-cdn-video-data-algeng.oss-cn-wulanchabu.aliyuncs.com/gen_image.png?x-oss-process=image/resize,p_50/format,webp" style="display: inline-block; vertical-align: middle;"/>
-<img src="https://public-cdn-video-data-algeng.oss-cn-wulanchabu.aliyuncs.com/gen_image1.png?x-oss-process=image/resize,p_50/format,webp" style="display: inline-block; vertical-align: middle; "/>
+[MIT License](LICENSE)

@@ -13,3 +13,4 @@ dist/
 minimax_mcp.egg-info/
 .coverage
 coverage.xml
+.vscode/
